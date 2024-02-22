@@ -46,7 +46,7 @@ public class ServiceStringListimpl implements StringList {
     public String remove(String item) {
         int index = indexOf(item);
         if (index == -1) {
-            throw new ThereIsNoSuchElementException("такого элемента не существует");
+            throw new ThereIsNoSuchElementException("такого элемента не существует!");
         }
         return remove(index);
     }
