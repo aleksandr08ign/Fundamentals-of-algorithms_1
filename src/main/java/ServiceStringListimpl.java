@@ -1,3 +1,7 @@
+import ru.skypro.FundamentalsOfAlgorithms.exception.NotEmptyException;
+import ru.skypro.FundamentalsOfAlgorithms.exception.OutsideTheArrayException;
+import ru.skypro.FundamentalsOfAlgorithms.exception.ThereIsNoSuchElementException;
+
 import java.util.Arrays;
 
 public class ServiceStringListimpl implements StringList {
@@ -13,7 +17,7 @@ public class ServiceStringListimpl implements StringList {
     @Override
     public String add(String item) {
         if (item == null) {
-            throw new NullPointerException("не должно быть пусто");
+            throw new NotEmptyException("не должно быть пусто");
         }
         array[size++] = item;
         return item;
@@ -42,7 +46,7 @@ public class ServiceStringListimpl implements StringList {
     public String remove(String item) {
         int index = indexOf(item);
         if (index == -1) {
-            throw new IllegalStateException("такого элемента не существует");
+            throw new ThereIsNoSuchElementException("такого элемента не существует");
         }
         return remove(index);
     }
@@ -101,7 +105,7 @@ public class ServiceStringListimpl implements StringList {
             return true;
         }
         if (otherList == null) {
-            throw new NullPointerException("не может быть равным нулю");
+            throw new NotEmptyException("не может быть равным нулю");
         }
         if (size != otherList.size()) {
             return false;
@@ -132,12 +136,13 @@ public class ServiceStringListimpl implements StringList {
 
     @Override
     public String[] toArray() {
-        return new String[0];
+        return Arrays.copyOf(array, array.length);
+
     }
 
     private void checkRange(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("за пределами массива");
+            throw new OutsideTheArrayException("за пределами массива");
         }
     }
 }
